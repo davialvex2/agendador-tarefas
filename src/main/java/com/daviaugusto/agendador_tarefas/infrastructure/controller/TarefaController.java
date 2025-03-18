@@ -1,6 +1,7 @@
 package com.daviaugusto.agendador_tarefas.infrastructure.controller;
 
 import com.daviaugusto.agendador_tarefas.infrastructure.dtos.TarefaDTO;
+import com.daviaugusto.agendador_tarefas.infrastructure.enums.StatusTarefaEnum;
 import com.daviaugusto.agendador_tarefas.infrastructure.service.TarefaService;
 import feign.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,16 @@ public class TarefaController {
     public ResponseEntity<Void> deletarTarefa(@PathVariable String id){
         tarefaServive.deletarTarefa(id);
         return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping
+    public ResponseEntity<TarefaDTO> atualizarStatus(@RequestParam("id") String id, @RequestParam("status")StatusTarefaEnum status){
+        return ResponseEntity.ok(tarefaServive.atualizarStatus(id,status));
+    }
+
+    @PutMapping
+    public ResponseEntity<TarefaDTO> atualizarTarefa(@RequestParam("id") String id, @RequestBody TarefaDTO tarefaDTO){
+        return ResponseEntity.ok(tarefaServive.atualizarTarefa(id, tarefaDTO));
     }
 
 
