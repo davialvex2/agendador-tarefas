@@ -42,7 +42,7 @@ public class TarefaService {
     }
 
     public List<TarefaDTO> buscarTarefaPeriodo(LocalDateTime min, LocalDateTime max) {
-        return tarefaConverter.paraListaTarefaDTO((tarefaRepository.findByDataEventoBetween(min, max)));
+        return tarefaConverter.paraListaTarefaDTO((tarefaRepository.findByDataEventoBetweenAndStatusTarefaEnum(min, max, StatusTarefaEnum.PEDENTE)));
     }
 
     public List<TarefaDTO> buscarTarefasPorEmail(String token) {
